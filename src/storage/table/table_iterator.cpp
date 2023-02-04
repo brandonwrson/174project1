@@ -38,7 +38,7 @@ auto TableIterator::operator->() -> Tuple * {
 }
 
 auto TableIterator::operator++() -> TableIterator & {
-  BufferPoolManager *buffer_pool_manager = table_heap_->buffer_pool_manager_;
+  BufferPoolManagerInstance *buffer_pool_manager = table_heap_->buffer_pool_manager_;
   auto cur_page = static_cast<TablePage *>(buffer_pool_manager->FetchPage(tuple_->rid_.GetPageId()));
   BUSTUB_ENSURE(cur_page != nullptr, "BPM full");  // all pages are pinned
 

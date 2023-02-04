@@ -16,7 +16,7 @@ namespace bustub {
  * Constructor
  */
 INDEX_TEMPLATE_ARGUMENTS
-BPLUSTREE_INDEX_TYPE::BPlusTreeIndex(std::unique_ptr<IndexMetadata> &&metadata, BufferPoolManager *buffer_pool_manager)
+BPLUSTREE_INDEX_TYPE::BPlusTreeIndex(std::unique_ptr<IndexMetadata> &&metadata, BufferPoolManagerInstance *buffer_pool_manager)
     : Index(std::move(metadata)),
       comparator_(GetMetadata()->GetKeySchema()),
       container_(GetMetadata()->GetName(), buffer_pool_manager, comparator_) {}

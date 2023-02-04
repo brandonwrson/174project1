@@ -24,7 +24,7 @@ namespace bustub {
 class CheckpointManager {
  public:
   CheckpointManager(TransactionManager *transaction_manager, LogManager *log_manager,
-                    BufferPoolManager *buffer_pool_manager)
+                    BufferPoolManagerInstance *buffer_pool_manager)
       : transaction_manager_(transaction_manager),
         log_manager_(log_manager),
         buffer_pool_manager_(buffer_pool_manager) {}
@@ -37,7 +37,7 @@ class CheckpointManager {
  private:
   TransactionManager *transaction_manager_ __attribute__((__unused__));
   LogManager *log_manager_ __attribute__((__unused__));
-  BufferPoolManager *buffer_pool_manager_ __attribute__((__unused__));
+  BufferPoolManagerInstance *buffer_pool_manager_ __attribute__((__unused__));
 };
 
 }  // namespace bustub

@@ -53,9 +53,9 @@ BustubInstance::BustubInstance(const std::string &db_file_name) {
   // We need more frames for GenerateTestTable to work. Therefore, we use 128 instead of the default
   // buffer pool size specified in `config.h`.
   try {
-    buffer_pool_manager_ = new BufferPoolManager(128, disk_manager_, LRUK_REPLACER_K, log_manager_);
+    buffer_pool_manager_ = new BufferPoolManagerInstance(128, disk_manager_, LRUK_REPLACER_K, log_manager_);
   } catch (NotImplementedException &e) {
-    std::cerr << "BufferPoolManager is not implemented, only mock tables are supported." << std::endl;
+    std::cerr << "BufferPoolManagerInstance is not implemented, only mock tables are supported." << std::endl;
     buffer_pool_manager_ = nullptr;
   }
 
@@ -85,9 +85,9 @@ BustubInstance::BustubInstance() {
   // We need more frames for GenerateTestTable to work. Therefore, we use 128 instead of the default
   // buffer pool size specified in `config.h`.
   try {
-    buffer_pool_manager_ = new BufferPoolManager(128, disk_manager_, LRUK_REPLACER_K, log_manager_);
+    buffer_pool_manager_ = new BufferPoolManagerInstance(128, disk_manager_, LRUK_REPLACER_K, log_manager_);
   } catch (NotImplementedException &e) {
-    std::cerr << "BufferPoolManager is not implemented, only mock tables are supported." << std::endl;
+    std::cerr << "BufferPoolManagerInstance is not implemented, only mock tables are supported." << std::endl;
     buffer_pool_manager_ = nullptr;
   }
 

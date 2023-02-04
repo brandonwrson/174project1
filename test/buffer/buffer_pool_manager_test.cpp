@@ -32,7 +32,7 @@ TEST(BufferPoolManagerTest, DISABLED_BinaryDataTest) {
   std::uniform_int_distribution<char> uniform_dist(0);
 
   auto *disk_manager = new DiskManager(db_name);
-  auto *bpm = new BufferPoolManager(buffer_pool_size, disk_manager, k);
+  auto *bpm = new BufferPoolManagerInstance(buffer_pool_size, disk_manager, k);
 
   page_id_t page_id_temp;
   auto *page0 = bpm->NewPage(&page_id_temp);
@@ -94,7 +94,7 @@ TEST(BufferPoolManagerTest, DISABLED_SampleTest) {
   const size_t k = 5;
 
   auto *disk_manager = new DiskManager(db_name);
-  auto *bpm = new BufferPoolManager(buffer_pool_size, disk_manager, k);
+  auto *bpm = new BufferPoolManagerInstance(buffer_pool_size, disk_manager, k);
 
   page_id_t page_id_temp;
   auto *page0 = bpm->NewPage(&page_id_temp);

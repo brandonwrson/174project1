@@ -26,7 +26,7 @@ TEST(BPlusTreeTests, DISABLED_DeleteTest1) {
   GenericComparator<8> comparator(key_schema.get());
 
   auto *disk_manager = new DiskManager("test.db");
-  auto *bpm = new BufferPoolManager(50, disk_manager);
+  auto *bpm = new BufferPoolManagerInstance(50, disk_manager);
   // create b+ tree
   BPlusTree<GenericKey<8>, RID, GenericComparator<8>> tree("foo_pk", bpm, comparator);
   GenericKey<8> index_key;
@@ -98,7 +98,7 @@ TEST(BPlusTreeTests, DISABLED_DeleteTest2) {
   GenericComparator<8> comparator(key_schema.get());
 
   auto *disk_manager = new DiskManager("test.db");
-  auto *bpm = new BufferPoolManager(50, disk_manager);
+  auto *bpm = new BufferPoolManagerInstance(50, disk_manager);
   // create b+ tree
   BPlusTree<GenericKey<8>, RID, GenericComparator<8>> tree("foo_pk", bpm, comparator);
   GenericKey<8> index_key;

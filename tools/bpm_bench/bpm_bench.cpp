@@ -103,7 +103,7 @@ struct BpmMetrics {
 // NOLINTNEXTLINE
 auto main(int argc, char **argv) -> int {
   using bustub::AccessType;
-  using bustub::BufferPoolManager;
+  using bustub::BufferPoolManagerInstance;
   using bustub::DiskManagerUnlimitedMemory;
   using bustub::page_id_t;
 
@@ -130,7 +130,7 @@ auto main(int argc, char **argv) -> int {
   }
 
   auto disk_manager = std::make_unique<DiskManagerUnlimitedMemory>();
-  auto bpm = std::make_unique<BufferPoolManager>(BUSTUB_BPM_SIZE, disk_manager.get(), LRU_K_SIZE);
+  auto bpm = std::make_unique<BufferPoolManagerInstance>(BUSTUB_BPM_SIZE, disk_manager.get(), LRU_K_SIZE);
   std::vector<page_id_t> page_ids;
 
   fmt::print(stderr, "[info] total_page={}, duration_ms={}, latency_ms={}, lru_k_size={}, bpm_size={}\n",

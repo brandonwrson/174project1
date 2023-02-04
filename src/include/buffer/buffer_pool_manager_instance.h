@@ -22,29 +22,27 @@
 #include "recovery/log_manager.h"
 #include "storage/disk/disk_manager.h"
 #include "storage/page/page.h"
-#include "storage/page/page_guard.h"
-
 namespace bustub {
 
 /**
- * BufferPoolManager reads disk pages to and from its internal buffer pool.
+ * BufferPoolManagerInstance reads disk pages to and from its internal buffer pool.
  */
-class BufferPoolManager {
+class BufferPoolManagerInstance {
  public:
   /**
-   * @brief Creates a new BufferPoolManager.
+   * @brief Creates a new BufferPoolManagerInstance.
    * @param pool_size the size of the buffer pool
    * @param disk_manager the disk manager
    * @param replacer_k the lookback constant k for the LRU-K replacer
    * @param log_manager the log manager (for testing only: nullptr = disable logging). Please ignore this for P1.
    */
-  BufferPoolManager(size_t pool_size, DiskManager *disk_manager, size_t replacer_k = LRUK_REPLACER_K,
+  BufferPoolManagerInstance(size_t pool_size, DiskManager *disk_manager, size_t replacer_k = LRUK_REPLACER_K,
                     LogManager *log_manager = nullptr);
 
   /**
-   * @brief Destroy an existing BufferPoolManager.
+   * @brief Destroy an existing BufferPoolManagerInstance.
    */
-  ~BufferPoolManager();
+  ~BufferPoolManagerInstance();
 
   /** @brief Return the size (number of frames) of the buffer pool. */
   auto GetPoolSize() -> size_t { return pool_size_; }
@@ -74,20 +72,6 @@ class BufferPoolManager {
   /**
    * TODO(P1): Add implementation
    *
-   * @brief PageGuard wrapper for NewPage
-   *
-   * Functionality should be the same as NewPage, except that
-   * instead of returning a pointer to a page, you return a
-   * BasicPageGuard structure.
-   *
-   * @param[out] page_id, the id of the new page
-   * @return BasicPageGuard holding a new page
-   */
-  auto NewPageGuarded(const page_id_t *page_id) -> BasicPageGuard;
-
-  /**
-   * TODO(P1): Add implementation
-   *
    * @brief Fetch the requested page from the buffer pool. Return nullptr if page_id needs to be fetched from the disk
    * but all frames are currently in use and not evictable (in another word, pinned).
    *
@@ -103,23 +87,6 @@ class BufferPoolManager {
    * @return nullptr if page_id cannot be fetched, otherwise pointer to the requested page
    */
   auto FetchPage(page_id_t page_id, AccessType access_type = AccessType::Unknown) -> Page *;
-
-  /**
-   * TODO(P1): Add implementation
-   *
-   * @brief PageGuard wrappers for FetchPage
-   *
-   * Functionality should be the same as FetchPage, except
-   * that, depending on the function called, a guard is returned.
-   * If FetchPageRead or FetchPageWrite is called, it is expected that
-   * the returned page already has a read or write latch held, respectively.
-   *
-   * @param page_id, the id of the page to fetch
-   * @return PageGuard holding the fetched page
-   */
-  auto FetchPageBasic(page_id_t page_id) -> BasicPageGuard;
-  auto FetchPageRead(page_id_t page_id) -> ReadPageGuard;
-  auto FetchPageWrite(page_id_t page_id) -> WritePageGuard;
 
   /**
    * TODO(P1): Add implementation

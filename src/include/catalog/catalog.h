@@ -112,7 +112,7 @@ class Catalog {
    * @param lock_manager The lock manager in use by the system
    * @param log_manager The log manager in use by the system
    */
-  Catalog(BufferPoolManager *bpm, LockManager *lock_manager, LogManager *log_manager)
+  Catalog(BufferPoolManagerInstance *bpm, LockManager *lock_manager, LogManager *log_manager)
       : bpm_{bpm}, lock_manager_{lock_manager}, log_manager_{log_manager} {}
 
   /**
@@ -342,7 +342,7 @@ class Catalog {
   }
 
  private:
-  [[maybe_unused]] BufferPoolManager *bpm_;
+  [[maybe_unused]] BufferPoolManagerInstance *bpm_;
   [[maybe_unused]] LockManager *lock_manager_;
   [[maybe_unused]] LogManager *log_manager_;
 

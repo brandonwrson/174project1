@@ -36,7 +36,7 @@ class ExecutionEngine {
    * @param txn_mgr The transaction manager used by the execution engine
    * @param catalog The catalog used by the execution engine
    */
-  ExecutionEngine(BufferPoolManager *bpm, TransactionManager *txn_mgr, Catalog *catalog)
+  ExecutionEngine(BufferPoolManagerInstance *bpm, TransactionManager *txn_mgr, Catalog *catalog)
       : bpm_{bpm}, txn_mgr_{txn_mgr}, catalog_{catalog} {}
 
   DISALLOW_COPY_AND_MOVE(ExecutionEngine);
@@ -94,7 +94,7 @@ class ExecutionEngine {
     }
   }
 
-  [[maybe_unused]] BufferPoolManager *bpm_;
+  [[maybe_unused]] BufferPoolManagerInstance *bpm_;
   [[maybe_unused]] TransactionManager *txn_mgr_;
   [[maybe_unused]] Catalog *catalog_;
 };

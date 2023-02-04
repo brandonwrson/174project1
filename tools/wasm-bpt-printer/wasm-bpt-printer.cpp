@@ -19,7 +19,7 @@
 #include "utf8proc/utf8proc.h"
 
 using bustub::BPlusTree;
-using bustub::BufferPoolManager;
+using bustub::BufferPoolManagerInstance;
 using bustub::DiskManager;
 using bustub::Exception;
 using bustub::GenericComparator;
@@ -40,7 +40,7 @@ auto UsageMessage() -> std::string {
 
 using BPT = BPlusTree<GenericKey<8>, RID, GenericComparator<8>>;
 BPT *tree = nullptr;
-BufferPoolManager *bpm = nullptr;
+BufferPoolManagerInstance *bpm = nullptr;
 Transaction *transaction = nullptr;
 std::unique_ptr<bustub::Schema> key_schema = nullptr;
 
@@ -58,7 +58,7 @@ auto BustubInit(int leaf_max_size, int internal_max_size) -> int {
   GenericComparator<8> comparator(key_schema.get());
 
   auto *disk_manager = new DiskManager("test.db");
-  bpm = new BufferPoolManager(100, disk_manager);
+  bpm = new BufferPoolManagerInstance(100, disk_manager);
   // create header_page
   page_id_t page_id;
   bpm->NewPage(&page_id);

@@ -41,7 +41,7 @@ class DiskExtendibleHashTable {
    * @param comparator comparator for keys
    * @param hash_fn the hash function
    */
-  explicit DiskExtendibleHashTable(const std::string &name, BufferPoolManager *buffer_pool_manager,
+  explicit DiskExtendibleHashTable(const std::string &name, BufferPoolManagerInstance *buffer_pool_manager,
                                    const KeyComparator &comparator, HashFunction<KeyType> hash_fn);
 
   /**
@@ -163,7 +163,7 @@ class DiskExtendibleHashTable {
 
   // member variables
   page_id_t directory_page_id_;
-  BufferPoolManager *buffer_pool_manager_;
+  BufferPoolManagerInstance *buffer_pool_manager_;
   KeyComparator comparator_;
 
   // Readers includes inserts and removes, writers are splits and merges

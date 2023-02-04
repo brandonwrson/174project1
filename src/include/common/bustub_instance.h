@@ -33,7 +33,7 @@ namespace bustub {
 class Transaction;
 class ExecutorContext;
 class DiskManager;
-class BufferPoolManager;
+class BufferPoolManagerInstance;
 class LockManager;
 class TransactionManager;
 class LogManager;
@@ -245,7 +245,7 @@ class BustubInstance {
   // we cannot do anything on them until someone decides to refactor the recovery test.
 
   DiskManager *disk_manager_;
-  BufferPoolManager *buffer_pool_manager_;
+  BufferPoolManagerInstance *buffer_pool_manager_;
   LockManager *lock_manager_;
   TransactionManager *txn_manager_;
   LogManager *log_manager_;

@@ -34,7 +34,7 @@ class ExecutorContext {
    * @param txn_mgr The transaction manager that the executor uses
    * @param lock_mgr The lock manager that the executor uses
    */
-  ExecutorContext(Transaction *transaction, Catalog *catalog, BufferPoolManager *bpm, TransactionManager *txn_mgr,
+  ExecutorContext(Transaction *transaction, Catalog *catalog, BufferPoolManagerInstance *bpm, TransactionManager *txn_mgr,
                   LockManager *lock_mgr)
       : transaction_(transaction), catalog_{catalog}, bpm_{bpm}, txn_mgr_(txn_mgr), lock_mgr_(lock_mgr) {}
 
@@ -49,7 +49,7 @@ class ExecutorContext {
   auto GetCatalog() -> Catalog * { return catalog_; }
 
   /** @return the buffer pool manager */
-  auto GetBufferPoolManager() -> BufferPoolManager * { return bpm_; }
+  auto GetBufferPoolManager() -> BufferPoolManagerInstance * { return bpm_; }
 
   /** @return the log manager - don't worry about it for now */
   auto GetLogManager() -> LogManager * { return nullptr; }
@@ -66,7 +66,7 @@ class ExecutorContext {
   /** The datbase catalog associated with this executor context */
   Catalog *catalog_;
   /** The buffer pool manager associated with this executor context */
-  BufferPoolManager *bpm_;
+  BufferPoolManagerInstance *bpm_;
   /** The transaction manager associated with this executor context */
   TransactionManager *txn_mgr_;
   /** The lock manager associated with this executor context */

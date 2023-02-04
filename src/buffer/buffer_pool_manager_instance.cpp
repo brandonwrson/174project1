@@ -16,7 +16,7 @@
 
 namespace bustub {
 
-BufferPoolManager::BufferPoolManager(size_t pool_size, DiskManager *disk_manager, size_t replacer_k,
+BufferPoolManagerInstance::BufferPoolManagerInstance(size_t pool_size, DiskManager *disk_manager, size_t replacer_k,
                                      LogManager *log_manager)
     : pool_size_(pool_size), disk_manager_(disk_manager), log_manager_(log_manager) {
   // TODO(students): remove this line after you have implemented the buffer pool manager
@@ -30,9 +30,9 @@ BufferPoolManager::BufferPoolManager(size_t pool_size, DiskManager *disk_manager
   }
 }
 
-BufferPoolManager::~BufferPoolManager() { delete[] pages_; }
+BufferPoolManagerInstance::~BufferPoolManagerInstance() { delete[] pages_; }
 
-auto BufferPoolManager::NewPage(page_id_t *page_id) -> Page * {
+auto BufferPoolManagerInstance::NewPage(page_id_t *page_id) -> Page * {
   frame_id_t frame_id;
   // If there is a free frame
   if (!free_list_.empty()) {
@@ -72,7 +72,7 @@ auto BufferPoolManager::NewPage(page_id_t *page_id) -> Page * {
   return &pages_[frame_id];
 }
 
-auto BufferPoolManager::FetchPage(page_id_t page_id, AccessType access_type) -> Page * {
+auto BufferPoolManagerInstance::FetchPage(page_id_t page_id, AccessType access_type) -> Page * {
   // std::unique_lock<std::mutex> lock(latch_);
 
   // Check if the page is in the Buffer Pool
@@ -128,7 +128,7 @@ auto BufferPoolManager::FetchPage(page_id_t page_id, AccessType access_type) -> 
   return &pages_[frame_id];
 }
 
-auto BufferPoolManager::UnpinPage(page_id_t page_id, bool is_dirty, [[maybe_unused]] AccessType access_type) -> bool {
+auto BufferPoolManagerInstance::UnpinPage(page_id_t page_id, bool is_dirty, [[maybe_unused]] AccessType access_type) -> bool {
   // std::unique_lock<std::mutex> lock(latch_);
   if (page_table_.count(page_id) == 0) {
     std::cout << "not in buffer pool" << std::endl;
@@ -147,7 +147,7 @@ auto BufferPoolManager::UnpinPage(page_id_t page_id, bool is_dirty, [[maybe_unus
   return true;
 }
 
-auto BufferPoolManager::FlushPage(page_id_t page_id) -> bool {
+auto BufferPoolManagerInstance::FlushPage(page_id_t page_id) -> bool {
   // std::unique_lock<std::mutex> lock(latch_);
   //  Find the page in page table
   auto it = page_table_.find(page_id);
@@ -161,13 +161,13 @@ auto BufferPoolManager::FlushPage(page_id_t page_id) -> bool {
   return true;
 }
 
-void BufferPoolManager::FlushAllPages() {
+void BufferPoolManagerInstance::FlushAllPages() {
   for (const auto &page : page_table_) {
     FlushPage(page.first);
   }
 }
 
-auto BufferPoolManager::DeletePage(page_id_t page_id) -> bool {
+auto BufferPoolManagerInstance::DeletePage(page_id_t page_id) -> bool {
   // Find page in page table
   auto it = page_table_.find(page_id);
   if (it == page_table_.end()) {
@@ -190,28 +190,7 @@ auto BufferPoolManager::DeletePage(page_id_t page_id) -> bool {
   return true;
 }
 
-auto BufferPoolManager::AllocatePage() -> page_id_t { return next_page_id_++; }
+auto BufferPoolManagerInstance::AllocatePage() -> page_id_t { return next_page_id_++; }
 
-auto BufferPoolManager::FetchPageBasic(page_id_t page_id) -> BasicPageGuard {
-  BasicPageGuard guard;
-  return guard;
-}
-
-auto BufferPoolManager::FetchPageRead(page_id_t page_id) -> ReadPageGuard {
-  Page *page = FetchPage(page_id);
-  ReadPageGuard guard(this, page);
-  return guard;
-}
-
-auto BufferPoolManager::FetchPageWrite(page_id_t page_id) -> WritePageGuard {
-  Page *page = FetchPage(page_id);
-  WritePageGuard guard(this, page);
-  return guard;
-}
-
-auto BufferPoolManager::NewPageGuarded(const page_id_t *page_id) -> BasicPageGuard {
-  BasicPageGuard guard;
-  return guard;
-}
 
 }  // namespace bustub

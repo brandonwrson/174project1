@@ -42,7 +42,7 @@ class LinearProbeHashTable {
    * @param num_buckets initial number of buckets contained by this hash table
    * @param hash_fn the hash function
    */
-  explicit LinearProbeHashTable(const std::string &name, BufferPoolManager *buffer_pool_manager,
+  explicit LinearProbeHashTable(const std::string &name, BufferPoolManagerInstance *buffer_pool_manager,
                                 const KeyComparator &comparator, size_t num_buckets, HashFunction<KeyType> hash_fn);
 
   /**
@@ -94,7 +94,7 @@ class LinearProbeHashTable {
 
   // member variable
   page_id_t header_page_id_;
-  BufferPoolManager *buffer_pool_manager_;
+  BufferPoolManagerInstance *buffer_pool_manager_;
   KeyComparator comparator_;
 
   // Readers includes inserts and removes, writer is only resize

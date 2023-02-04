@@ -23,7 +23,7 @@
 namespace bustub {
 
 template <typename KeyType, typename ValueType, typename KeyComparator>
-HASH_TABLE_TYPE::LinearProbeHashTable(const std::string &name, BufferPoolManager *buffer_pool_manager,
+HASH_TABLE_TYPE::LinearProbeHashTable(const std::string &name, BufferPoolManagerInstance *buffer_pool_manager,
                                       const KeyComparator &comparator, size_t num_buckets,
                                       HashFunction<KeyType> hash_fn)
     : buffer_pool_manager_(buffer_pool_manager), comparator_(comparator), hash_fn_(std::move(hash_fn)) {}

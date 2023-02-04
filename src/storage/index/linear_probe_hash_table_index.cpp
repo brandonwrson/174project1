@@ -8,7 +8,7 @@ namespace bustub {
  */
 template <typename KeyType, typename ValueType, typename KeyComparator>
 HASH_TABLE_INDEX_TYPE::LinearProbeHashTableIndex(std::unique_ptr<IndexMetadata> &&metadata,
-                                                 BufferPoolManager *buffer_pool_manager, size_t num_buckets,
+                                                 BufferPoolManagerInstance *buffer_pool_manager, size_t num_buckets,
                                                  const HashFunction<KeyType> &hash_fn)
     : Index(std::move(metadata)),
       comparator_(GetMetadata()->GetKeySchema()),

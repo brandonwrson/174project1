@@ -27,7 +27,7 @@ namespace bustub {
 INDEX_TEMPLATE_ARGUMENTS
 class BPlusTreeIndex : public Index {
  public:
-  BPlusTreeIndex(std::unique_ptr<IndexMetadata> &&metadata, BufferPoolManager *buffer_pool_manager);
+  BPlusTreeIndex(std::unique_ptr<IndexMetadata> &&metadata, BufferPoolManagerInstance *buffer_pool_manager);
 
   void InsertEntry(const Tuple &key, RID rid, Transaction *transaction) override;
 

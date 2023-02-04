@@ -18,14 +18,14 @@
 
 namespace bustub {
 
-TableHeap::TableHeap(BufferPoolManager *buffer_pool_manager, LockManager *lock_manager, LogManager *log_manager,
+TableHeap::TableHeap(BufferPoolManagerInstance *buffer_pool_manager, LockManager *lock_manager, LogManager *log_manager,
                      page_id_t first_page_id)
     : buffer_pool_manager_(buffer_pool_manager),
       lock_manager_(lock_manager),
       log_manager_(log_manager),
       first_page_id_(first_page_id) {}
 
-TableHeap::TableHeap(BufferPoolManager *buffer_pool_manager, LockManager *lock_manager, LogManager *log_manager,
+TableHeap::TableHeap(BufferPoolManagerInstance *buffer_pool_manager, LockManager *lock_manager, LogManager *log_manager,
                      Transaction *txn)
     : buffer_pool_manager_(buffer_pool_manager), lock_manager_(lock_manager), log_manager_(log_manager) {
   // Initialize the first table page.

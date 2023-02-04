@@ -37,7 +37,7 @@ class TableHeap {
    * @param log_manager the log manager
    * @param first_page_id the id of the first page
    */
-  TableHeap(BufferPoolManager *buffer_pool_manager, LockManager *lock_manager, LogManager *log_manager,
+  TableHeap(BufferPoolManagerInstance *buffer_pool_manager, LockManager *lock_manager, LogManager *log_manager,
             page_id_t first_page_id);
 
   /**
@@ -47,7 +47,7 @@ class TableHeap {
    * @param log_manager the log manager
    * @param txn the creating transaction
    */
-  TableHeap(BufferPoolManager *buffer_pool_manager, LockManager *lock_manager, LogManager *log_manager,
+  TableHeap(BufferPoolManagerInstance *buffer_pool_manager, LockManager *lock_manager, LogManager *log_manager,
             Transaction *txn);
 
   /**
@@ -109,7 +109,7 @@ class TableHeap {
   inline auto GetFirstPageId() const -> page_id_t { return first_page_id_; }
 
  private:
-  BufferPoolManager *buffer_pool_manager_;
+  BufferPoolManagerInstance *buffer_pool_manager_;
   LockManager *lock_manager_;
   LogManager *log_manager_;
   page_id_t first_page_id_{};

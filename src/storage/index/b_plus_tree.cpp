@@ -8,7 +8,7 @@
 
 namespace bustub {
 INDEX_TEMPLATE_ARGUMENTS
-BPLUSTREE_TYPE::BPlusTree(std::string name, BufferPoolManager *buffer_pool_manager, const KeyComparator &comparator,
+BPLUSTREE_TYPE::BPlusTree(std::string name, BufferPoolManagerInstance *buffer_pool_manager, const KeyComparator &comparator,
                           int leaf_max_size, int internal_max_size)
     : index_name_(std::move(name)),
       root_page_id_(INVALID_PAGE_ID),
@@ -157,7 +157,7 @@ void BPLUSTREE_TYPE::RemoveFromFile(const std::string &file_name, Transaction *t
  * This method is used for debug only, You don't need to modify
  */
 INDEX_TEMPLATE_ARGUMENTS
-void BPLUSTREE_TYPE::Draw(BufferPoolManager *bpm, const std::string &outf) {
+void BPLUSTREE_TYPE::Draw(BufferPoolManagerInstance *bpm, const std::string &outf) {
   if (IsEmpty()) {
     LOG_WARN("Draw an empty tree");
     return;
@@ -174,7 +174,7 @@ void BPLUSTREE_TYPE::Draw(BufferPoolManager *bpm, const std::string &outf) {
  * This method is used for debug only, You don't need to modify
  */
 INDEX_TEMPLATE_ARGUMENTS
-void BPLUSTREE_TYPE::Print(BufferPoolManager *bpm) {
+void BPLUSTREE_TYPE::Print(BufferPoolManagerInstance *bpm) {
   if (IsEmpty()) {
     LOG_WARN("Print an empty tree");
     return;
@@ -192,7 +192,7 @@ void BPLUSTREE_TYPE::Print(BufferPoolManager *bpm) {
  * @param out
  */
 INDEX_TEMPLATE_ARGUMENTS
-void BPLUSTREE_TYPE::ToGraph(BPlusTreePage *page, BufferPoolManager *bpm, std::ofstream &out) const {
+void BPLUSTREE_TYPE::ToGraph(BPlusTreePage *page, BufferPoolManagerInstance *bpm, std::ofstream &out) const {
   std::string leaf_prefix("LEAF_");
   std::string internal_prefix("INT_");
   if (page->IsLeafPage()) {
@@ -283,7 +283,7 @@ void BPLUSTREE_TYPE::ToGraph(BPlusTreePage *page, BufferPoolManager *bpm, std::o
  * @param bpm
  */
 INDEX_TEMPLATE_ARGUMENTS
-void BPLUSTREE_TYPE::ToString(BPlusTreePage *page, BufferPoolManager *bpm) const {
+void BPLUSTREE_TYPE::ToString(BPlusTreePage *page, BufferPoolManagerInstance *bpm) const {
   if (page->IsLeafPage()) {
     auto *leaf = reinterpret_cast<LeafPage *>(page);
     std::cout << "Leaf Page: " << leaf->GetPageId() << " parent: " << leaf->GetParentPageId()

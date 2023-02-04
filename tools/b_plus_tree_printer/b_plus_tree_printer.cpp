@@ -19,7 +19,7 @@
 #include "test_util.h"  // NOLINT
 
 using bustub::BPlusTree;
-using bustub::BufferPoolManager;
+using bustub::BufferPoolManagerInstance;
 using bustub::DiskManager;
 using bustub::Exception;
 using bustub::GenericComparator;
@@ -72,7 +72,7 @@ auto main(int argc, char **argv) -> int {
   GenericComparator<8> comparator(key_schema.get());
 
   auto *disk_manager = new DiskManager("test.db");
-  auto *bpm = new BufferPoolManager(100, disk_manager);
+  auto *bpm = new BufferPoolManagerInstance(100, disk_manager);
   // create and fetch header_page
   page_id_t page_id;
   auto header_page = bpm->NewPage(&page_id);
