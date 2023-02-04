@@ -83,7 +83,7 @@ class BufferPoolManager {
    * @param[out] page_id, the id of the new page
    * @return BasicPageGuard holding a new page
    */
-  auto NewPageGuarded(page_id_t *page_id) -> BasicPageGuard;
+  auto NewPageGuarded(const page_id_t *page_id) -> BasicPageGuard;
 
   /**
    * TODO(P1): Add implementation
